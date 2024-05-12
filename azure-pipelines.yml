@@ -1,0 +1,22 @@
+
+pool:VM Module
+stages:
+- stage: string  terraform init
+  displayName: terraform init
+  jobs:
+- job:terraform init
+  displayName: terraform init
+  steps: 
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: 'latest'
+  - task: TerraformTaskV4@4
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: 'c:\agent_work\1\s\Module'
+      backendServiceArm: 'YashdeepCloud'
+      backendAzureRmResourceGroupName: 'data'
+      backendAzureRmStorageAccountName: 'newstgprodrg'
+      backendAzureRmContainerName: '$logs'
+      backendAzureRmKey: 'backend'
